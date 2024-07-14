@@ -8,6 +8,23 @@ type EventCollection @entity {
   numberPoolsV4: BigInt!
 }
 
+type Wallet @entity {
+  # User Wallet Address
+  id: ID!
+  numberDeploymentsPool: BigInt!
+}
+
+type Token @entity {
+  # Smart contract address of the token
+  id: ID!
+  name: String!
+  symbol: String!
+  decimals: BigInt!
+
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+}
+
 type InitializeEvent @entity(immutable: true) {
   id: Bytes!
   poolId: Bytes! # bytes32

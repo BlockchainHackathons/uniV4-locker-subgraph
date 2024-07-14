@@ -20,6 +20,8 @@ dataSources:
       abis:
         - name: Launcher
           file: ./abis/Launcher.json
+        - name: ERC20
+          file: ./abis/ERC20.json
       eventHandlers:
         - event: Initialize(bytes32,address,address,uint24,address)
           handler: handleInitialize
