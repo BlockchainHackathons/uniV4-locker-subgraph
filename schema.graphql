@@ -6,6 +6,7 @@ type EventCollection @entity {
   launcher: String!
   hookLock: String!
   numberPoolsV4: BigInt!
+  numberLocks: BigInt!
 }
 
 type Pool @entity {
@@ -15,6 +16,19 @@ type Pool @entity {
   currency1: Token!
   fee: Int!
   clockhook: Bytes!
+  locks: [Lock!]! @derivedFrom(field: "pool")
+}
+
+type Lock @entity {
+  # nft token Id
+  id: ID!
+  unlockDate: BigInt!
+  amount0: BigInt!
+  amount1: BigInt!
+  liquidity: BigInt!
+  pool: Pool!
+  currency0: Token!
+  currency1: Token!
 }
 
 type InitializeEvent @entity(immutable: true) {
