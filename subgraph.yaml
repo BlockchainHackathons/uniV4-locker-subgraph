@@ -24,3 +24,85 @@ dataSources:
         - event: Initialize(bytes32,address,address,uint24,address)
           handler: handleInitialize
       file: ./src/launcher.ts
+
+  - kind: ethereum
+    name: CLLockerHook
+    network: chapel
+    source:
+      address: "0x74980ccF8f43C772dD89B824561f8803eC4A4960"
+      abi: CLLockerHook
+      startBlock: 42065482
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - DecreaseLiquidity
+        - ExtendLock
+        - LiquidityAdded
+      abis:
+        - name: CLLockerHook
+          file: ./abis/CLLockerHook.json
+      eventHandlers:
+        - event: DecreaseLiquidity(uint256,uint128,uint256,uint256)
+          handler: handleDecreaseLiquidity
+        - event: ExtendLock(uint256,uint256)
+          handler: handleExtendLock
+        - event: LiquidityAdded(bytes32,uint256,uint128,uint256,uint256,uint256)
+          handler: handleLiquidityAdded
+      file: ./src/cl-locker-hook.ts
+      
+  - kind: ethereum
+    name: CLPoolManager
+    network: chapel
+    source:
+      address: "0x40a081A39E9638fa6e2463B92A4eff4Bdf877179"
+      abi: CLPoolManager
+      startBlock: 41758277
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Donate
+        - DynamicLPFeeUpdated
+        - CLPoolManagerInitialize
+        - ModifyLiquidity
+        - OwnershipTransferred
+        - PausableRoleGranted
+        - PausableRoleRevoked
+        - Paused
+        - ProtocolFeeControllerUpdated
+        - ProtocolFeeUpdated
+        - Swap
+        - Unpaused
+      abis:
+        - name: CLPoolManager
+          file: ./abis/CLPoolManager.json
+      eventHandlers:
+        - event: Donate(indexed bytes32,indexed address,uint256,uint256,int24)
+          handler: handleDonate
+        - event: DynamicLPFeeUpdated(indexed bytes32,uint24)
+          handler: handleDynamicLPFeeUpdated
+        - event: Initialize(indexed bytes32,indexed address,indexed address,address,uint24,bytes32)
+          handler: handleInitialize
+        - event: ModifyLiquidity(indexed bytes32,indexed address,int24,int24,bytes32,int256)
+          handler: handleModifyLiquidity
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PausableRoleGranted(indexed address)
+          handler: handlePausableRoleGranted
+        - event: PausableRoleRevoked(indexed address)
+          handler: handlePausableRoleRevoked
+        - event: Paused(address)
+          handler: handlePaused
+        - event: ProtocolFeeControllerUpdated(address)
+          handler: handleProtocolFeeControllerUpdated
+        - event: ProtocolFeeUpdated(indexed bytes32,uint24)
+          handler: handleProtocolFeeUpdated
+        - event: Swap(indexed bytes32,indexed
+            address,int128,int128,uint160,uint128,int24,uint24,uint24)
+          handler: handleSwap
+        - event: Unpaused(address)
+          handler: handleUnpaused
+      file: ./src/cl-pool-manager.ts

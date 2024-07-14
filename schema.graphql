@@ -9,3 +9,155 @@ type Initialize @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+type DecreaseLiquidity @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  liquidity: BigInt! # uint128
+  removedAmount0: BigInt! # uint256
+  removedAmount1: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ExtendLock @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  unlockDate: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LiquidityAdded @entity(immutable: true) {
+  id: Bytes!
+  poolId: Bytes! # bytes32
+  tokenId: BigInt! # uint256
+  liquidity: BigInt! # uint128
+  amount0: BigInt! # uint256
+  amount1: BigInt! # uint256
+  unlockDate: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+type Donate @entity(immutable: true) {
+  id: Bytes!
+  CLPoolManager_id: Bytes! # bytes32
+  sender: Bytes! # address
+  amount0: BigInt! # uint256
+  amount1: BigInt! # uint256
+  tick: Int! # int24
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type DynamicLPFeeUpdated @entity(immutable: true) {
+  id: Bytes!
+  CLPoolManager_id: Bytes! # bytes32
+  dynamicLPFee: Int! # uint24
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CLPoolManagerInitialize @entity(immutable: true) {
+  id: Bytes!
+  CLPoolManager_id: Bytes! # bytes32
+  currency0: Bytes! # address
+  currency1: Bytes! # address
+  hooks: Bytes! # address
+  fee: Int! # uint24
+  parameters: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ModifyLiquidity @entity(immutable: true) {
+  id: Bytes!
+  CLPoolManager_id: Bytes! # bytes32
+  sender: Bytes! # address
+  tickLower: Int! # int24
+  tickUpper: Int! # int24
+  salt: Bytes! # bytes32
+  liquidityDelta: BigInt! # int256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PausableRoleGranted @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PausableRoleRevoked @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Paused @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ProtocolFeeControllerUpdated @entity(immutable: true) {
+  id: Bytes!
+  protocolFeeController: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ProtocolFeeUpdated @entity(immutable: true) {
+  id: Bytes!
+  CLPoolManager_id: Bytes! # bytes32
+  protocolFee: Int! # uint24
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Swap @entity(immutable: true) {
+  id: Bytes!
+  CLPoolManager_id: Bytes! # bytes32
+  sender: Bytes! # address
+  amount0: BigInt! # int128
+  amount1: BigInt! # int128
+  sqrtPriceX96: BigInt! # uint160
+  liquidity: BigInt! # uint128
+  tick: Int! # int24
+  fee: Int! # uint24
+  protocolFee: Int! # uint24
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Unpaused @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
