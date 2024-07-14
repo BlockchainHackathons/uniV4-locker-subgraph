@@ -1,6 +1,7 @@
 import { Initialize as InitializeEvent } from "../generated/Launcher/Launcher";
 import { addEventCollectionNumberPoolsV4 } from "./utils/entities/eventCollection";
 import { createInitializeEvent } from "./utils/entities/initializeEvent";
+import { createPool } from "./utils/entities/pool";
 import { createToken } from "./utils/entities/token";
 import {
   addNumberDeploymentsPoolsWallet,
@@ -18,4 +19,5 @@ export function handleInitialize(event: InitializeEvent): void {
   addNumberDeploymentsPoolsWallet(walletId);
   createToken(currency0, block);
   createToken(currency1, block);
+  createPool(event);
 }

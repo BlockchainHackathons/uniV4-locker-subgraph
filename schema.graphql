@@ -8,6 +8,27 @@ type EventCollection @entity {
   numberPoolsV4: BigInt!
 }
 
+type Pool @entity {
+  # poolId of v4 pool
+  id: ID!
+  currency0: Token!
+  currency1: Token!
+  fee: Int!
+  clockhook: Bytes!
+}
+
+type InitializeEvent @entity(immutable: true) {
+  id: Bytes!
+  poolId: Bytes! # bytes32
+  currency0: Bytes! # address
+  currency1: Bytes! # address
+  fee: Int! # uint24
+  clockhook: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 type Wallet @entity {
   # User Wallet Address
   id: ID!
@@ -25,17 +46,6 @@ type Token @entity {
   blockTimestamp: BigInt!
 }
 
-type InitializeEvent @entity(immutable: true) {
-  id: Bytes!
-  poolId: Bytes! # bytes32
-  currency0: Bytes! # address
-  currency1: Bytes! # address
-  fee: Int! # uint24
-  clockhook: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
 type DecreaseLiquidityEvent @entity(immutable: true) {
   id: Bytes!
   tokenId: BigInt! # uint256
