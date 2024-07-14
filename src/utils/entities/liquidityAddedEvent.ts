@@ -1,5 +1,5 @@
 import { LiquidityAdded } from "../../../generated/CLLockerHook/CLLockerHook";
-import { LiquidityAddedEvent } from "../../../generated/schema";
+import { Data, LiquidityAddedEvent } from "../../../generated/schema";
 
 export const createLiquidityAddedEvent = (event: LiquidityAdded): void => {
   let entity = new LiquidityAddedEvent(
@@ -17,4 +17,10 @@ export const createLiquidityAddedEvent = (event: LiquidityAdded): void => {
   entity.transactionHash = event.transaction.hash;
 
   entity.save();
+
+  let data = new Data(entity.blockTimestamp.toString());
+  data.liquidity = entity.liquidity;
+  data.amount0 = entity.amount0;
+  data.amount1 = entity.amount1;
+  data.save();
 };
