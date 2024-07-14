@@ -79,6 +79,11 @@ dataSources:
       abis:
         - name: CLPoolManager
           file: ./abis/CLPoolManager.json
+          
+      blockHandlers:
+        - handler: handleOnce
+          filter:
+            kind: once 
       eventHandlers:
         - event: Donate(indexed bytes32,indexed address,uint256,uint256,int24)
           handler: handleDonate

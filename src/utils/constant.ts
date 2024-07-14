@@ -15,3 +15,6 @@ export const CENT_BI = BigInt.fromI32(100);
 
 //chamel
 export const chainId = BigInt.fromI32(97);
+export const launcher = "0x9206a06620cd141c546b454a5b0e53b0152aa41e";
+export const hookLock = "0x74980ccf8f43c772dd89b824561f8803ec4a4960";
+export const poolm = "0x40a081a39e9638fa6e2463b92a4eff4bdf877179";

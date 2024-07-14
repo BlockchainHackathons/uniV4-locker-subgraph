@@ -1,4 +1,14 @@
-type Initialize @entity(immutable: true) {
+type EventCollection @entity {
+  # launcher contract address
+  id: ID!
+  chaindId: BigInt!
+  poolm: String!
+  launcher: String!
+  hookLock: String!
+  numberPoolsV4: BigInt!
+}
+
+type InitializeEvent @entity(immutable: true) {
   id: Bytes!
   poolId: Bytes! # bytes32
   currency0: Bytes! # address

@@ -1,3 +1,4 @@
+import { ethereum } from "@graphprotocol/graph-ts";
 import {
   Donate as DonateEvent,
   DynamicLPFeeUpdated as DynamicLPFeeUpdatedEvent,
@@ -16,7 +17,6 @@ import {
   CLPoolManagerInitialize,
   Donate,
   DynamicLPFeeUpdated,
-  Initialize,
   ModifyLiquidity,
   OwnershipTransferred,
   PausableRoleGranted,
@@ -27,6 +27,7 @@ import {
   Swap,
   Unpaused,
 } from "../generated/schema";
+import { createEventCollection } from "./utils/entities/eventCollection";
 
 export function handleDonate(event: DonateEvent): void {
   let entity = new Donate(
@@ -217,4 +218,8 @@ export function handleUnpaused(event: UnpausedEvent): void {
   entity.transactionHash = event.transaction.hash;
 
   entity.save();
+}
+
+export function handleOnce(block: ethereum.Block): void {
+  createEventCollection();
 }
