@@ -68,6 +68,7 @@ type LiquidityAddedEvent @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
 type Donate @entity(immutable: true) {
   id: Bytes!
   CLPoolManager_id: Bytes! # bytes32
@@ -188,3 +189,20 @@ type Unpaused @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+###########################
+#### Fulltext Searches ####
+###########################
+
+type _Schema_
+  @fulltext(
+    name: "tokenSearch"
+    language: en
+    algorithm: rank
+    include: [
+      {
+        entity: "Token"
+        fields: [{ name: "symbol" }, { name: "name" }, { name: "id" }]
+      }
+    ]
+  )
