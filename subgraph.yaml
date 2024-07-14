@@ -1,0 +1,26 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Launcher
+    network: chapel
+    source:
+      address: "0x9206a06620Cd141c546B454a5B0e53b0152aA41e"
+      abi: Launcher
+      startBlock: 42065554
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Initialize
+      abis:
+        - name: Launcher
+          file: ./abis/Launcher.json
+      eventHandlers:
+        - event: Initialize(bytes32,address,address,uint24,address)
+          handler: handleInitialize
+      file: ./src/launcher.ts

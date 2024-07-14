@@ -1,0 +1,11 @@
+type Initialize @entity(immutable: true) {
+  id: Bytes!
+  poolId: Bytes! # bytes32
+  currency0: Bytes! # address
+  currency1: Bytes! # address
+  fee: Int! # uint24
+  clockhook: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
