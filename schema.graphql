@@ -30,6 +30,13 @@ type Lock @entity {
   currency0: Token!
   currency1: Token!
   owner: Wallet!
+  initialLockStatus: LockStatus!
+}
+
+enum LockStatus {
+  UNLOCKED
+  SMALLLOCKED
+  LOCKED
 }
 
 type InitializeEvent @entity(immutable: true) {

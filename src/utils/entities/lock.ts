@@ -1,10 +1,11 @@
-import { log } from "@graphprotocol/graph-ts";
+import { BigInt, log } from "@graphprotocol/graph-ts";
 import {
   DecreaseLiquidity,
   ExtendLock,
   LiquidityAdded,
 } from "../../../generated/CLLockerHook/CLLockerHook";
 import { Lock, Pool } from "../../../generated/schema";
+import { LockStatus } from "../constant";
 
 export const createLock = (event: LiquidityAdded): void => {
   let params = event.params;
@@ -23,6 +24,13 @@ export const createLock = (event: LiquidityAdded): void => {
   lock.currency0 = pool.currency0;
   lock.currency1 = pool.currency1;
   lock.owner = event.transaction.from.toHexString();
+  lock.initialLockStatus = LockStatus[2];
+  if (params.unlockDate.lt(BigInt.fromI32(86400 * 30))) {
+    lock.initialLockStatus = LockStatus[1];
+  }
+  if (params.unlockDate.lt(BigInt.fromI32(86400))) {
+    lock.initialLockStatus = LockStatus[0];
+  }
 
   lock.save();
 };
