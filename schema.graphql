@@ -36,7 +36,7 @@ type InitializeEvent @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
-type DecreaseLiquidity @entity(immutable: true) {
+type DecreaseLiquidityEvent @entity(immutable: true) {
   id: Bytes!
   tokenId: BigInt! # uint256
   liquidity: BigInt! # uint128
@@ -47,7 +47,7 @@ type DecreaseLiquidity @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type ExtendLock @entity(immutable: true) {
+type ExtendLockEvent @entity(immutable: true) {
   id: Bytes!
   tokenId: BigInt! # uint256
   unlockDate: BigInt! # uint256
@@ -56,7 +56,7 @@ type ExtendLock @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type LiquidityAdded @entity(immutable: true) {
+type LiquidityAddedEvent @entity(immutable: true) {
   id: Bytes!
   poolId: Bytes! # bytes32
   tokenId: BigInt! # uint256
