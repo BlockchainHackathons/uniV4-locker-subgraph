@@ -17,6 +17,7 @@ export const createLock = (event: LiquidityAdded): void => {
   lock.pool = params.poolId.toString();
   lock.currency0 = pool.currency0;
   lock.currency1 = pool.currency1;
+  lock.owner = event.transaction.from.toHexString();
 
   lock.save();
 };

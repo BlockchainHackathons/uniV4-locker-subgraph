@@ -29,6 +29,7 @@ type Lock @entity {
   pool: Pool!
   currency0: Token!
   currency1: Token!
+  owner: Wallet!
 }
 
 type InitializeEvent @entity(immutable: true) {
@@ -47,6 +48,7 @@ type Wallet @entity {
   # User Wallet Address
   id: ID!
   numberDeploymentsPool: BigInt!
+  locks: [Lock!]! @derivedFrom(field: "owner")
 }
 
 type Token @entity {
