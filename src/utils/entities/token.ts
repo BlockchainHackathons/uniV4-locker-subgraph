@@ -6,9 +6,9 @@ export function createToken(
   tokenAddress: Address,
   block: ethereum.Block
 ): void {
-  let token = Token.load(tokenAddress.toString());
+  let token = Token.load(tokenAddress.toHexString());
   if (!token) {
-    token = new Token(tokenAddress.toString());
+    token = new Token(tokenAddress.toHexString());
     const erc20Contract = ERC20.bind(tokenAddress);
     const name = erc20Contract.try_name();
     const symbol = erc20Contract.try_symbol();

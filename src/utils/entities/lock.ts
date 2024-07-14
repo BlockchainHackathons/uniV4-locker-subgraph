@@ -1,3 +1,4 @@
+import { log } from "@graphprotocol/graph-ts";
 import {
   DecreaseLiquidity,
   ExtendLock,
@@ -7,14 +8,18 @@ import { Lock, Pool } from "../../../generated/schema";
 
 export const createLock = (event: LiquidityAdded): void => {
   let params = event.params;
-  let pool = Pool.load(params.poolId.toString())!;
+  let pool = Pool.load(params.poolId.toHexString());
+  if (!pool) {
+    log.warning("poolId : {}", [params.poolId.toHexString()]);
+    return;
+  }
 
   let lock = new Lock(params.tokenId.toString());
   lock.unlockDate = params.unlockDate;
   lock.amount0 = params.amount0;
   lock.amount1 = params.amount1;
   lock.liquidity = params.liquidity;
-  lock.pool = params.poolId.toString();
+  lock.pool = params.poolId.toHexString();
   lock.currency0 = pool.currency0;
   lock.currency1 = pool.currency1;
   lock.owner = event.transaction.from.toHexString();
